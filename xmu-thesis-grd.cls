@@ -17,12 +17,14 @@
 \ProvidesClass{xmu-thesis-grd}[2021/12/28 v1.2 xmu-thesis-grd document class]
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{ctexbook}}
+\newif\ifxmu@scholar\xmu@scholarfalse
 \newif\ifxmu@master\xmu@masterfalse
 \newif\ifxmu@doctor\xmu@doctorfalse
 \newif\ifxmu@istwoside\xmu@istwosidefalse
 \newif\ifxmu@pdf\xmu@pdffalse
 \newif\ifxmu@compact\xmu@compactfalse
 \DeclareOption{twoside}{\xmu@istwosidetrue}
+\DeclareOption{scholar}{\xmu@scholartrue}
 \DeclareOption{master}{\xmu@mastertrue}
 \DeclareOption{doctor}{\xmu@doctortrue}
 \DeclareOption{pdf}{\xmu@pdftrue}
@@ -105,7 +107,7 @@
 \def\xmu@value@studentnumber{200215001}
 \ifxmu@master
 	\def\xmu@value@thesistype{硕~~~~士~~~~学~~~~位~~~~论~~~~文}
-\else 
+\else
 	\def\xmu@value@thesistype{博~~~~士~~~~学~~~~位~~~~论~~~~文}
 \fi
 \def\xmu@value@title{资产重组：一个资不抵债国有企业的最佳选择}
@@ -224,7 +226,10 @@
 	
 	\setstretch{2.2}
 	\ifxmu@pdf
-		\includepdf[pages=-]{pdf_files/copyright_statement.pdf}
+		\ifxmu@scholar
+		\else
+			\includepdf[pages=-]{pdf_files/copyright_statement.pdf}
+		\fi
 	\else
  		\begin{center}
 			{\bfseries \heiti \zihao{-2} \xmu@label@copyright@title}
@@ -257,7 +262,10 @@
 	\thispagestyle{empty}
 	
 	\ifxmu@pdf
-		\includepdf[pages=-]{pdf_files/name_list.pdf}
+		\ifxmu@scholar
+		\else
+			\includepdf[pages=-]{pdf_files/name_list.pdf}
+		\fi
 	\else
 		\input{chapters/name_list.tex}
 	\fi
